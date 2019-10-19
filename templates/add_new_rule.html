@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head><h2>NLP Brain </h2>
+	<title></title>
+</head>
+<body >
+	<form action="add_new_rule" method="post">
+	
+	<input type="hidden" name="rule_id" value={{rule_id}}>
+	<br>
+	 
+	 Assigned Class:- <input type="checkbox" name = "is_assign_class_1" id="checkBox1" onclick="disable_id(this.checked, 'dropdown1')" /> 
+     <select id="dropdown1" name = "assign_class_1">
+      {% for class in classes %}
+    
+      <option value={{class['class_id']}}>{{class['class_name']}} </option>
+      
+    {%endfor%}
+    
+    
+</select> <input type="checkbox" name = "is_assign_class_2" id="checkBox2" onclick="disable_id(this.checked, 'dropdown2')"> 
+<select id="dropdown2" name = "assign_class_2">
+    {% for class in classes %}
+    
+      <option value={{class['class_id']}}>{{class['class_name']}} </option>
+      
+    {%endfor%}
+</select> <input type="checkbox" name = "is_assign_class_3" id="checkBox3" onclick="disable_id(this.checked, 'dropdown3')"> 
+<select id="dropdown3" name = "assign_class_3">
+    {% for class in classes %}
+    
+      <option value={{class['class_id']}}>{{class['class_name']}} </option>
+      
+    {%endfor%}
+</select> <br>
+<br><br>
+RULE :-
+   <style type="text/css">
+
+        .div-inline {display: inline-block;}
+        .div-inline select {display: none;}
+        input[type=checkbox]#checkBox-4:checked ~ select  {display: inline;}
+        input[type=checkbox]#checkBox-4:checked + #textBox1-1  {display: none;}
+
+        
+        input[type=checkbox]#checkBox-5:checked ~ select  {display: inline;}
+        input[type=checkbox]#checkBox-5:checked + #textBox1-2  {display: none;}
+
+
+       
+        input[type=checkbox]#checkBox-6:checked ~ select  {display: inline;}
+        input[type=checkbox]#checkBox-6:checked + #textBox1-3  {display: none;}
+
+    </style>
+
+
+   <div class="div-inline">
+   <input type="checkbox" id="checkBox-4" name = "is_regex_1">
+   <input type="text" id="textBox1-1" name = "text_1"> 
+    <select name = "regex_class_1">
+        {% for class in classes %}
+    
+      <option value={{class['class_id']}}>{{class['class_name']}} </option>
+      
+    {%endfor%}
+    </select>
+    </div>
+
+
+
+
+    <div class="div-inline">
+    <input type="checkbox" id="checkBox-5" name = "is_regex_2">
+    <input type="text" id="textBox1-2" name = "text_2"> 
+    <select name = "regex_class_2">
+        {% for class in classes %}
+    
+      <option value={{class['class_id']}}>{{class['class_name']}} </option>
+      
+    {%endfor%}
+    </select>
+    </div>
+
+   <div class="div-inline">
+    <input type="checkbox" id="checkBox-6" name = "is_regex_3">
+    <input type="text" id="textBox1-3" name = "text_3"> 
+    <select name = "regex_class_3">
+        {% for class in classes %}
+    
+      <option value={{class['class_id']}}>{{class['class_name']}} </option>
+      
+    {%endfor%}
+    </select>
+    </div><br><br>
+	<input type="submit" value="Submit now" /><input type="reset" value="Reset" /><br><br>
+	</form>
+    </body>
+</html>
+
+    <script language="javascript">
+    function enableDisable(bEnable, textBoxID)
+    {
+         document.getElementById(textBoxID).disabled = bEnable
+    }
+    function disable_id(bEnable, textBoxID)
+    {
+         document.getElementById(textBoxID).enable = bEnable
+    }
+
+</script>

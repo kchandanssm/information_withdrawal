@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html><head>
+  <title>Get text selection and cursor position by ourcodeworld</title>
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+    /**
+     * Return an 
+     * @param {DOMElement} el A dom element of a textarea or input text.
+     * @return {Object} reference Object with 2 properties (start and end) with the identifier of the location of the cursor and selected text.
+     **/
+    function getInputSelection(el) {
+        var start = 0, end = 0, normalizedValue, range,
+            textInputRange, len, endRange;
+            // alert(el.selectionStart)
+            if (window.getSelection)
+          {
+            var selectionRange = window.getSelection();
+            // alert(selectionRange.createRange)
+
+            var selected = selectionRange.getRangeAt(0)
+            var all_doc = el.innerHTML
+            len = all_doc.length;
+            normalizedValue = all_doc.replace(/\r\n/g, "\n");
+
+            var n = all_doc.indexOf(selected);
+            start = n;
+            // alert(selected.toString().length)
+            end = start + selected.toString().length;
+            
+            // Create a working TextRange that lives only in the input
+            
+          }
+        return {
+            start: start,
+            end: end
+        };
+    }
+    var x = document.getElementById("texto");
+    x.addEventListener("click", mySecondFunction);
+
+    function mySecondFunction(){
+    	var input = document.getElementById("texto");
+      var inputContent = input.innerHTML.length;
+    	
+      var result = getInputSelection(input);
+      var resultSpan = document.getElementById("result");
+      
+      if(result.start == result.end){
+      	resultSpan.innerHTML = "No text selected. Position of cursor is " + result.start +" of " +inputContent;
+      }else{
+      	resultSpan.innerHTML = "You've selected text ("+result.start+" to "+ result.end +") from a total length of " + inputContent;
+      }
+    
+    }
+    }//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <p>
+ Get the cursor position in a textarea or a text input or the selected text.
+</p><br>
+<p id="texto">dfdsf sdfsdf sdfdsfsdf sdfsdf</p><br>
+<input id="trigger" value="Check" type="button"><br>
+<span id="result"></span>
+<input id="input" type="text">
+</body></html>

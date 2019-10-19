@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Human Annotation | NLP Brain</title>
+  <!-- Bootstrap core CSS-->
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="/static/css/sb-admin.css" rel="stylesheet">
+	<script src="https://www.w3schools.com/lib/w3.js"></script>
+ <style type="text/css">
+    * { font-family:Arial; }
+h2 { padding:0 0 5px 5px; }
+h2 a { color: #224f99; }
+a { color:#999; text-decoration: none; }
+a:hover { color:#802727; }
+p { padding:0 0 5px 0; }
+
+input { padding:5px; border:1px solid #999; border-radius:4px; -moz-border-radius:4px; -web-kit-border-radius:4px; -khtml-border-radius:4px; }
+
+.tab li   .active { 
+  background-color: blue;
+  color: white
+}
+.tab-content {
+     margin: 10px;
+}
+
+.select-cls {
+
+max-width: 90px;
+}
+  </style>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    //<![CDATA[
+        $(window).load(function(){
+          $(function() {
+        var scntDiv = $('#p_scents');
+         console.log($('#p_scents').length);
+        var i = $('#p_scents').length ;
+        
+        $('#addScnt').on('click', function() {
+
+
+                $('<p><label for="p_scnts"><input id = "startPosition_' + i +'" type = "text" size="5" name = "startPosition_' + i +'" placeholder="Start" ></input> <input id = "EndPosition_' + i +'" size="5" type = "text" name = "EndPosition_' + i +'" placeholder="End"></input> <select name = "entityId_' + i +'">'+document.getElementById("entity_list").innerHTML+'</select></label> <a href="#" class="remScnt">Remove</a></p>').appendTo(scntDiv);
+                i++;
+                return false;
+        });
+        
+
+
+ $("body").on("click", ".remScnt", function(){
+          
+                        $(this).parents('p').remove();
+                         i--;
+     });
+
+
+
+
+});
+
+        });
+    //]]>
+
+</script>
+
+<style>.entities {
+     line-height: 2; 
+}
+
+[data-entity] {
+     padding: 0.25em 0.35em;
+     margin: 0px 0.25em;
+     line-height: 1;
+     display: inline-block;
+     border-radius: 0.25em;
+     border: 1px solid; 
+}
+
+[data-entity]::after {
+     box-sizing: border-box;
+     content: attr(data-entity);
+     font-size: 0.6em;
+     line-height: 1;
+     padding: 0.35em;
+     border-radius: 0.35em;
+     text-transform: uppercase;
+     display: inline-block;
+     vertical-align: middle;
+     margin: 0px 0px 0.1rem 0.5rem; 
+}
+
+[data-entity][data-entity="PERSON"] {
+     background: rgba(166, 226, 45, 0.2);
+     border-color: rgb(166, 226, 45); 
+}
+
+[data-entity][data-entity="PERSON"]::after {
+     background: rgb(166, 226, 45); 
+}
+
+[data-entity][data-entity="norp"] {
+     background: rgba(224, 0, 132, 0.2);
+     border-color: rgb(224, 0, 132); 
+}
+
+[data-entity][data-entity="norp"]::after {
+     background: rgb(224, 0, 132); 
+}
+
+[data-entity][data-entity="FACILITY"] {
+     background: rgba(67, 198, 252, 0.2);
+     border-color: rgb(67, 198, 252); 
+}
+
+[data-entity][data-entity="FACILITY"]::after {
+     background: rgb(67, 198, 252); 
+}
+
+[data-entity][data-entity="ORG"] {
+     background: rgba(67, 198, 252, 0.2);
+     border-color: rgb(67, 198, 252); 
+}
+
+[data-entity][data-entity="ORG"]::after {
+     background: rgb(67, 198, 252); 
+}
+
+[data-entity][data-entity="GPE"] {
+     background: rgba(253, 151, 32, 0.2);
+     border-color: rgb(253, 151, 32); 
+}
+
+[data-entity][data-entity="GPR"]::after {
+     background: rgb(253, 151, 32); 
+}
+
+[data-entity][data-entity="LOC"] {
+     background: rgba(253, 151, 32, 0.2);
+     border-color: rgb(253, 151, 32); 
+}
+
+[data-entity][data-entity="LOC"]::after {
+     background: rgb(253, 151, 32); 
+}
+
+[data-entity][data-entity="PRODUCT"] {
+     background: rgba(142, 125, 255, 0.2);
+     border-color: rgb(142, 125, 255); 
+}
+
+[data-entity][data-entity="PRODUCT"]::after {
+     background: rgb(142, 125, 255); 
+}
+
+[data-entity][data-entity="EVENT"] {
+     background: rgba(255, 204, 0, 0.2);
+     border-color: rgb(255, 204, 0); 
+}
+
+[data-entity][data-entity="EVENT"]::after {
+     background: rgb(255, 204, 0); 
+}
+
+[data-entity][data-entity="WORK_OF_ART"] {
+     background: rgba(255, 204, 0, 0.2);
+     border-color: rgb(255, 204, 0); 
+}
+
+[data-entity][data-entity="WORK_OF_ART"]::after {
+     background: rgb(255, 204, 0); 
+}
+
+[data-entity][data-entity="LANGUAGE"] {
+     background: rgba(255, 204, 0, 0.2);
+     border-color: rgb(255, 204, 0); 
+}
+
+[data-entity][data-entity="LANGUAGE"]::after {
+     background: rgb(255, 204, 0); 
+}
+
+[data-entity][data-entity="DATE"] {
+     background: rgba(47, 187, 171, 0.2);
+     border-color: rgb(47, 187, 171); 
+}
+
+[data-entity][data-entity="DATE"]::after {
+     background: rgb(47, 187, 171); 
+}
+
+[data-entity][data-entity="TIME"] {
+     background: rgba(47, 187, 171, 0.2);
+     border-color: rgb(47, 187, 171); 
+}
+
+[data-entity][data-entity="TIME"]::after {
+     background: rgb(47, 187, 171); 
+}
+
+[data-entity][data-entity="PERCENT"] {
+     background: rgba(153, 153, 153, 0.2);
+     border-color: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="PERCENT"]::after {
+     background: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="MONEY"] {
+     background: rgba(153, 153, 153, 0.2);
+     border-color: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="MONEY"]::after {
+     background: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="QUANTITY"] {
+     background: rgba(153, 153, 153, 0.2);
+     border-color: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="QUANTITY"]::after {
+     background: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="ORDINAL"] {
+     background: rgba(153, 153, 153, 0.2);
+     border-color: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="ORDINAL"]::after {
+     background: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="CARDINAL"] {
+     background: rgba(153, 153, 153, 0.2);
+     border-color: rgb(153, 153, 153); 
+}
+
+[data-entity][data-entity="CARDINAL"]::after {
+     background: rgb(153, 153, 153); 
+}
+
+</style>
+
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <div w3-include-html="/static/menu.html"></div> 
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="index.html">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Human Annotation</li>
+      </ol>
+      <div class="row">
+      
+        <div class="col-8">
+{% for ind in content_all_data %}
+<h1>{{ind['content_title']}}</h1>
+
+{%endfor%}
+
+          <p><div id='longtext' contenteditable="true">    <p id="texto">{{raw_text| safe}}</p><br>
+ </div></p>
+        </div>
+        <div class="col-4">
+
+
+
+               <ul class="nav nav-tabs tab" role="tablist">
+                    <li role="presentation">
+                         <a href="#entity"  role="tab" data-toggle="tab" class="btn"> Entity </a></li>
+                    
+                    <li role="presentation" >
+                         <a href="#relation" role="tab" data-toggle="tab" class="btn"> Relation </a>
+                    </li>
+               </ul>
+                    
+                    <!-- Tab panes -->
+               <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="entity">
+                              <h3>Create Custom entity</h3>
+                              <form action="upload_human_annotation" method="POST">
+                              <input name="content_id" value="{{content_id}}" type="hidden">
+                              <div id="p_scents">
+                                  <p>
+                                      <label for="p_scnts"><input id="startPosition_0" size="5" name="startPosition_0" value="" placeholder="Start Position" type="text"> <input id="EndPosition_0" size="5" name="EndPosition_0" value="" placeholder="End Position" type="text">
+                              <select name="entityId_0" id="entity_list">
+                              {% for key, value in entity_list.iteritems()%}
+                              
+                                <option value="{{key}}">{{value}}</option>
+                              {%endfor%}
+                              
+                              </select>
+                              </label>
+                                  </p>
+                              </div>
+                                <h2><a href="#" id="addScnt">Add Another Entity</a></h2>
+                              <button type="submit" value="Submit">Submit</button>
+                              </form>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane " id="relation">
+                         <h4>Relationship</h4>
+                         <div style="display: none">
+
+                         </div>
+                         
+                         <form class="relationshipForm" method="POST">
+                              <table class="table table-striped table-borderless">
+                                        <thead>
+                                             <tr>
+                                                  <th scope="col">Head</th>
+                                                  <th scope="col">Tail</th>
+                                                  <th scope="col">Relation ship</th>
+                                                  <th>   </th>
+                                             </tr>
+                                        </thead>
+                                        <tbody class="relation-tbody">
+
+
+                                        </tbody>
+
+                              </table>
+                              <button type="button" class="btn btn-link addNewRelationShip">Add new RelationShip</button>
+                              <button type="submit">Submit</button>
+                         </form>
+                    </div>
+               </div>
+
+
+
+      
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Northout NLP Brain 2017</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+
+    <!-- Bootstrap core JavaScript-->
+	
+
+<script>
+	w3.includeHTML();
+	</script>
+
+<script type="text/javascript">//<![CDATA[
+
+    window.onload=function() {
+    /**
+     * Return an 
+     * @param {DOMElement} el A dom element of a textarea or input text.
+     * @return {Object} reference Object with 2 properties (start and end) with the identifier of the location of the cursor and selected text.
+     **/
+    function getInputSelection(el) {
+        var start = 0, end = 0, normalizedValue, range,
+            textInputRange, len, endRange;
+            // alert(el.selectionStart)
+            if (window.getSelection) {
+            var selectionRange = window.getSelection();
+            var selected = selectionRange.getRangeAt(0)
+            var all_doc = el.innerHTML.toString()
+            len = all_doc.length;
+            normalizedValue = all_doc.replace(/\r\n/g, "\n");
+            normalizedValue = normalizedValue.replace(/\<(?!img|br).*?\>/g, "");
+            var n = normalizedValue.indexOf(selected);
+            start = n;
+            end = start + selected.toString().length;
+            
+          }
+        return {
+            start: start,
+            end: end
+        };
+    }
+   
+    var x = document.getElementById("texto");
+    x.addEventListener("click", mySecondFunction);
+
+    function mySecondFunction(){
+
+      var input = document.getElementById("texto");
+      var inputContent = input.innerHTML.length;
+      
+      var result = getInputSelection(input);
+      var i = $('#p_scents p').length;
+      i --
+      document.getElementById("result")
+      document.getElementById('startPosition_'+i).value = result.start;
+      document.getElementById('EndPosition_'+i).value = result.end;
+      
+      if(result.start == result.end){
+        //resultSpan.innerHTML = "No text selected. Position of cursor is " + result.start +" of " +inputContent;
+      }else{
+        //resultSpan.innerHTML = "You've selected text ("+result.start+" to "+ result.end +") from a total length of " + inputContent;
+      }
+      //alert();
+    }
+    }//]]> 
+
+
+
+    $(document).ready(function(){
+     //relationship-main-row
+
+
+     var all_relationships = JSON.parse('{{ all_relationships | tojson | safe}}')
+     var all_entity = JSON.parse('{{ annoted_entity | tojson | safe}}')
+
+     all_entity_data = [];
+
+     for(var i =0; i<all_entity.length; i++) {
+          var newId = `${all_entity[i].id}_${all_entity[i].start}_${all_entity[i].end}`;
+          all_entity[i].new_id = newId;
+          all_entity_data[newId] = all_entity[i];
+     }
+
+     var entityOptions = '<option value="">select</option>';
+
+     for(var i =0; i<all_entity.length; i++) {
+          entityOptions += `<option value="${all_entity[i].new_id}">${all_entity[i].name} ( ${all_entity[i].start}, ${all_entity[i].end})</option>`;
+     }
+
+     var relationshipOptions = '<option value="">select</option>';
+
+     for(var i =0; i<all_relationships.length; i++) {
+          relationshipOptions += `<option value="${all_relationships[i].id}">${all_relationships[i].name} </option>`;
+     }
+     var relationRow = `
+               <tr class="">
+                    <td scope="col">
+                         <select name="head_word[]" required class="select-cls">
+                              ${entityOptions}
+                         </select>
+                    </td>
+                    <td scope="col">
+                         <select name="tail_word[]" required class="select-cls">
+                                   ${entityOptions}
+                         </select>
+                    </td>
+                    <td scope="col">
+                         <select name="relationship[]" required class="select-cls">
+                              ${relationshipOptions}
+                         </select>
+                    </td>
+                    <td> <button type="button" class="btn btn-link removeCurrentRelationShip ">Remove</button> </td>
+               </tr>`;
+
+
+     $('.addNewRelationShip').click(function(){
+          $('.relation-tbody').append(relationRow);
+
+     });
+     $('.relation-tbody').append(relationRow);
+
+
+     $("body").on("click", ".removeCurrentRelationShip", function(){
+          $(this).closest('tr').remove();
+     });
+
+     $('.relationshipForm').submit(function(e){
+
+          e.preventDefault();
+
+          var formData = $('.relationshipForm').serialize();
+          var head_word = $(" select[name='head_word[]']").map(function(){return $(this).val();}).get();
+          var tail_word = $(" select[name='tail_word[]']").map(function(){return $(this).val();}).get();
+          var relationship = $(" select[name='relationship[]']").map(function(){return $(this).val();}).get();
+
+         /*  console.log('head_word', head_word, head_word[0]);
+          console.log('tail_word', tail_word);
+          console.log('relationship', relationship); */
+          // console.log('dummyRowRelationShip', dummyRowRelationShip);
+
+          var data = [];
+         for(var i= 0; i < relationship.length; i++) {
+
+          var obj = {};
+          var params = new window.URLSearchParams(window.location.search);
+          obj.contain_id = params.get('content_id');
+          // make it dynamic
+          var head_id = head_word[i]
+          var tail_id = tail_word[i]
+          obj.head_word = all_entity_data[head_id].name;
+          obj.tail_word =  all_entity_data[tail_id].name;
+          obj.relationship_id = relationship[i];
+          obj.head_start = all_entity_data[head_id].start;
+          obj.head_end = all_entity_data[head_id].end;
+
+
+
+          obj.tail_start = all_entity_data[tail_id].start;
+          obj.tail_end = all_entity_data[tail_id].end;
+          data.push(obj);
+
+         }
+         console.log('final obj', data)
+          $.ajax({
+             type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            url: 'annotation_relationship',
+            success: function (e) {
+                 alert('successful');
+                console.log(e);
+                // window.location = "http://192.168.57.223:5000/preview";
+            },
+            error: function(error) {
+            alert('successful');
+            console.log(error);
+            }
+          });     
+         
+     });
+
+     
+     
+    });
+</script>
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin.min.js"></script>
+  </div>
+</body>
+
+</html>

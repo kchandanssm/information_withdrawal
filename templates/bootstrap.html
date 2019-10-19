@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <style>
+         .red
+         {
+         color: white;
+         background-color: red;
+         }
+         .green
+         {
+         color: white;
+         background-color: green;
+         }
+         .blue
+         {
+         color: white;
+         background-color: blue;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+         <br />
+         <div class="card" style="max-width:100%;">
+            <div class="card-block">
+               <div id="rules" style="float: left">
+                  <div id="elements">
+                     <span style="float:left" id="elements_sub_div">
+                        <span style="border: 4px solid red; padding: 15px; min-width:200px; display: inline-block;float: left">
+                           Assigned Class:- <input type="checkbox" id="checkBox1" onclick="enableDisable(!this.checked, 'dropdown1')"  autocomplete="off"> 
+                           <select id="dropdown1" disabled >
+                              <option>test 1 </option>
+                              <option>test 2</option>
+                              <option>test 3</option>
+                           </select>
+                           <br>
+                           <br><br>
+                           RULE :-
+                           <input type="checkbox" id="checkBox-4" onclick="enableDisable(!this.checked, 'dropdown4')"  autocomplete="off">
+                           <select id = 'dropdown4' disabled >
+                              <option>dropdown 1</option>
+                              <option>dropdown 1</option>
+                              <option>dropdown 1</option>
+                           </select>
+                           <input type="text" id="textBox1-1"  >
+                        </span>
+
+                     </span>
+                  </div>
+                 
+              
+            </div>
+         </div>
+      </div>
+      </div>
+
+     <button type="button" id="add-more-rules">
+      Add more rules
+      </button>
+      <input type="submit" value="Submit now" /><input type="reset" value="Reset" /><br><br>
+      <!-- jQuery first, then Bootstrap JS. -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+      <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+   </body>
+</html>
+<script language="javascript">
+   function enableDisable(bEnable, textBoxID)
+   { 
+        document.getElementById(textBoxID).disabled = bEnable
+        
+   }
+   
+   
+   $(document).ready(function(){
+     $('#add-more-rules').on("click",function(){
+         $('#elements').append($('#elements_sub_div').html());
+     });
+     $('#checkBox-4').click(function(){
+      $('#textBox1-1').toggle();
+   });
+   })
+</script>
+

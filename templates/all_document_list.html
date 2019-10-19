@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>ALL Documents| NLP Brain</title>
+  <!-- Bootstrap core CSS-->
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="/static/css/sb-admin.css" rel="stylesheet">
+	<script src="https://www.w3schools.com/lib/w3.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <div w3-include-html="/static/menu.html"></div> 
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">All Documents</li>
+      </ol>
+      <!-- Icon Cards-->
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-primary o-hidden h-100">
+            <div class="card-body" data-toggle="modal" data-target="#addURL_2">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-comments"></i>
+              </div>
+              <div class="mr-5">Add URL</div>
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-warning o-hidden h-100">
+            <div class="card-body" data-toggle="modal" data-target="#addRSS">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-list"></i>
+              </div>
+              <div class="mr-5">Add RSS</div>
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-success o-hidden h-100">
+            <div class="card-body" data-toggle="modal" data-target="#addText">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-shopping-cart"></i>
+              </div>
+              <div class="mr-5">Add Text</div>
+            </div>
+            
+          </div>
+        </div>
+       <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-success o-hidden h-100">
+            <div class="card-body" data-toggle="modal" data-target="#addURL">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-shopping-cart"></i>
+              </div>
+              <div class="mr-5">Add CSV</div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Documents</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                 
+                  <th>Title</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+             
+              <tbody>
+{% for ind in content_all_data %}
+                <tr>
+                  
+                  <td><a id="link" href = 'data_detail?content_id={{ind['id_tab_content']}}'>{{ind['content_title']}} </a></td>
+                  <td>{{ind['raw_content'][:100].encode("utf-8")}}</td>
+                </tr>
+{%endfor%}
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+   <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Northout NLP Brain 2017</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add URL -->
+   <div class="modal fade" id="addURL" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add CSV</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <form action="add_csv_data" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">CSV:</label>
+              <input type="file" name = 'data_file' class="form-control-file" id="exampleFormControlFile1">
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button  type="submit" method="get" class="btn btn-primary">Submit</button>
+        </div>
+          </form>
+      </div>
+    </div>
+</div>
+    <!-- Add URL End -->
+    <!-- Add RSS -->
+<div class="modal fade" id="addRSS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add RSS</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action = '/add_rss_feed'>
+      <div class="modal-body">
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">RSS:</label>
+            <input type="text" name = 'rss_feed' class="form-control" id="recipient-name">
+          </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button  type="submit" method="get" class="btn btn-primary">Submit</button>
+      </div>
+        </form>
+    </div>
+  </div>
+</div>
+    <!-- Add RSS End -->
+
+    <!-- Add text -->
+<div class="modal fade" id="addText" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Text</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form action = '/add_data_text'>
+      <div class="modal-body">
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Title:</label>
+            <input type="text" name = 'title' class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Contain:</label>
+            <textarea class="form-control" name = "content" id="message-text"></textarea>
+          </div>
+
+<!-- Add text -->
+<div class="modal fade" id="addCSV" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel_2">Add URL</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <form action = '/add_data_URL'>
+        <div class="modal-body">
+
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">URL:</label>
+              <input type="text" name = 'url' class="form-control" id="recipient-name_2">
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button  type="submit" method="get" class="btn btn-primary">Submit</button>
+        </div>
+          </form>
+      </div>
+    </div>
+</div>    <!-- Add text End -->
+    <!-- Bootstrap core JavaScript-->
+	<script>
+	w3.includeHTML();
+	</script>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin.min.js"></script>
+  </div>
+</body>
+
+</html>
